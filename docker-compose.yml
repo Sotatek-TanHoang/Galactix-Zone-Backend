@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: project2-db
+    restart: always
+    ports:
+      - "5430:5432"
+    volumes:
+      - dbdata:/data/postgres
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=app
+      - POSTGRES_DB=app
+    networks:
+      - project2_network
+  # redis:
+  #   container_name: 'redis'
+  #   image: 'redis:3.2.0'
+  #   ports:
+  #     - '6379:6379'
+  #   volumes:
+  #     - 'redisdata:/data'
+networks:
+  project2_network:
+    driver: bridge
+volumes:
+  dbdata:
+  # redisdata:
