@@ -1,48 +1,56 @@
 import { Controller, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { UserService } from './providers/User.service';
+import { AuthService } from '@shared/auth/auth.service';
+import { JwtAuthGuard } from '@shared/auth/jwt-auth.guard';
+import { AuthGuard } from '@shared/guards/admin.guard';
+
 import { UserRequestDto } from './providers/dtos/user-request.dto';
 import { UserResponseDto } from './providers/dtos/user-response.dto';
-import { AuthGuard } from '@shared/guards/admin.guard';
+import { UserService } from './providers/User.service';
 
 @Controller('')
 @ApiTags('User')
 export class UserController {
-    constructor(private readonly userService: UserService) {}
-    
+    constructor(private readonly userService: UserService, private authService: AuthService) {}
+
     @Post('/login')
     @ApiOkResponse({ type: UserResponseDto })
     handleUserLogin() {
-        return 'login public user ok'
+        const res = { res: this.authService.login({ res: `12` }) };
+
+        console.log('====================================');
+        console.log(res);
+        console.log('====================================');
+        return 'ok';
     }
 
     @Post('/admin/login')
     @ApiOkResponse({ type: UserResponseDto })
     handleAdminLogin() {
-        return 'login admin ok'
+        return 'login admin ok';
     }
-    
+
     @Post('/admin')
     @ApiOkResponse({ type: UserResponseDto })
     handleCreateAdmin() {
-        return 'create admin ok'
+        return 'create admin ok';
     }
     @Put('/admin')
     @ApiOkResponse({ type: UserResponseDto })
     handleUpdateAdmin() {
-        return 'edit admin ok'
+        return 'edit admin ok';
     }
+
+    @UseGuards(JwtAuthGuard)
     @Get('/admin')
     @ApiOkResponse({ type: UserResponseDto })
-    @UseGuards(AuthGuard)
     handleGetManyAdmin(@Req() req) {
-
-        return 'get many admin ok'
+        return { res: 'get many admin ok', user: req.user };
     }
     @Get('/admin/:id')
     @ApiOkResponse({ type: UserResponseDto })
     handleGetSingleAdmin() {
-        return 'get single admin ok'
+        return 'get single admin ok';
     }
 }

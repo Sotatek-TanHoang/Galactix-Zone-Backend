@@ -12,7 +12,7 @@ import { UserRequestDto } from './dtos/user-request.dto';
 export class UserRepository extends BaseRepository<UserEntity> {
     protected alias: ETableName = ETableName.USER;
     buildQueryBuilder(params: UserRequestDto) {
-        const { id, wallet_address, query,status,role } = params;
+        const { id, wallet_address, query, status, role } = params;
         const qb = this.createQb();
         qb.select([
             `${this.alias}.id`,
@@ -24,17 +24,15 @@ export class UserRepository extends BaseRepository<UserEntity> {
         ]);
         if (id) qb.where(`${this.alias}.id = :id`, { id });
         if (wallet_address) qb.where(`${this.alias}.wallet_address = :wallet_address`, { wallet_address });
-        if(status){
-
+        if (status) {
         }
-        if(role){
-            
+        if (role) {
         }
         if (query) {
-            const searchQuery=`%${query}%`;
+            const searchQuery = `%${query}%`;
             qb.where(`${this.alias}.username like :searchQuery`, { searchQuery })
-            .orWhere(`${this.alias}.wallet_address like :searchQuery`, { searchQuery })
-            .orWhere(`${this.alias}.email like :searchQuery`, { searchQuery })
+                .orWhere(`${this.alias}.wallet_address like :searchQuery`, { searchQuery })
+                .orWhere(`${this.alias}.email like :searchQuery`, { searchQuery });
         }
 
         return qb;

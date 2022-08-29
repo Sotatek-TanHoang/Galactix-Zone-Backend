@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { FetchResult } from 'types/web3-types';
 import { Eth } from 'web3-eth';
 
 import { getWeb3 } from '@shared/utils/web3';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class Connection {
     private web3: Eth;
 
-    constructor(configService:ConfigService) {
+    constructor(configService: ConfigService) {
         console.log('====================================');
-        console.log(configService.get("PROVIDER"));
+        console.log(configService.get('PROVIDER'));
         console.log('====================================');
         this.web3 = getWeb3();
     }

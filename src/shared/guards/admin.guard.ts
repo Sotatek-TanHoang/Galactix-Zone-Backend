@@ -1,25 +1,23 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { JwtService } from '@nestjs/jwt';
+import { Observable } from 'rxjs';
+
 import { UserRepository } from '@modules/users/providers/User.repository';
+
 import { AuthService } from '@shared/auth/auth.service';
-import {JwtService} from '@nestjs/jwt'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private reflector: Reflector,private userRepo:UserRepository,private authService:AuthService) {}
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-   try{
-   this.authService.hello()
- 
-    return true;
-   }catch(e){
-    console.log('====================================');
-    console.log(e.message);
-    console.log('====================================');
-    return false;
-  }
-  }
+    constructor(private reflector: Reflector) {}
+    canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
+        try {
+            return true;
+        } catch (e) {
+            console.log('====================================');
+            console.log(e.message);
+            console.log('====================================');
+            return false;
+        }
+    }
 }

@@ -14,7 +14,6 @@ async function bootstrap() {
     app.setGlobalPrefix(configService.get<string>(EEnvKey.GLOBAL_PREFIX));
     app.enableCors();
 
-
     /* Swagger */
     if (configService.get<string>(EEnvKey.SWAGGER_PATH)) {
         initSwagger(app, configService.get<string>(EEnvKey.SWAGGER_PATH));

@@ -1,9 +1,10 @@
 import { Column, Entity } from 'typeorm';
 
+import { ETableName } from '@constants/entity.constant';
+
 import { BaseEntityIncludeTime } from '@core/base-entity';
 
 import { IUserAttribute } from './attributes/User.interface';
-import { ETableName } from '@constants/entity.constant';
 
 @Entity(ETableName.USER)
 export class UserEntity extends BaseEntityIncludeTime implements IUserAttribute {
@@ -18,7 +19,6 @@ export class UserEntity extends BaseEntityIncludeTime implements IUserAttribute 
 
     @Column({ name: 'status', type: 'character varying' })
     status: string;
-
 
     @Column({ name: 'role', type: 'character varying' })
     role: string;

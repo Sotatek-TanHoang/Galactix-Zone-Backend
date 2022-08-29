@@ -4,6 +4,6 @@ export class UserRequestDto extends BasePaginationWithSortRequestDto {
     id?: number;
     wallet_address?: string;
     query?: string;
-    role?:string;
-    status?:string;
+    role?: string;
+    status?: string;
 }

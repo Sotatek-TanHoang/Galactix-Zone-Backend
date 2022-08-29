@@ -13,23 +13,22 @@ export class createBlockTable1650872194081 implements MigrationInterface {
                         type: 'character varying',
                         length: '50',
                         isPrimary: true,
-                        
                     },
                     {
                         name: 'wallet_address',
                         type: 'character varying',
                         length: '42',
-                        isUnique:true
+                        isUnique: true,
                     },
                     {
                         name: 'username',
                         type: 'character varying',
-                        isNullable:true
+                        isNullable: true,
                     },
                     {
                         name: 'email',
                         type: 'character varying',
-                        isNullable:true
+                        isNullable: true,
                     },
                     {
                         name: 'status',
