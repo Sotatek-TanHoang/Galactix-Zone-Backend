@@ -17,7 +17,7 @@ import {
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from '@shared/auth/auth.service';
-import { JwtAuthGuard } from '@shared/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { SignatureValidationPipe } from '@shared/pipes/signature.pipe';
 import { formatReponseSuccess } from '@shared/utils/format';
 import { Roles } from '@shared/utils/helpers';
