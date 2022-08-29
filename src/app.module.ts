@@ -8,8 +8,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MODULES } from './modules';
 
+import { AuthModule } from '@shared/auth/auth.module';
 @Module({
-    imports: [ConfigurationModule, DatabaseModule, ScheduleModule.forRoot(), ...MODULES],
+    imports: [ConfigurationModule, DatabaseModule, AuthModule,ScheduleModule.forRoot(), ...MODULES],
     controllers: [AppController],
     providers: [AppService],
 })

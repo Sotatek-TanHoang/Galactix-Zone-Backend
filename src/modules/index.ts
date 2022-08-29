@@ -1,3 +1,3 @@
-import { UserModule } from './users/Block.module';
+import { UserModule } from './users/User.module';
 
 export const MODULES = [UserModule];
