@@ -5,59 +5,20 @@ export class UserResponseDto {
     id: string;
 
     @ApiProperty()
-    number: number;
+    wallet_address: string;
 
     @ApiProperty()
-    hash: string;
+    email: string;
 
     @ApiProperty()
-    parentHash: string;
+    username: string;
 
     @ApiProperty()
-    nonce: string;
+    status: number;
 
     @ApiProperty()
-    sha3Uncles: string;
+    created_at: string;
 
     @ApiProperty()
-    logsBloom: string;
-
-    @ApiProperty({ nullable: true })
-    transactionRoot?: string;
-
-    @ApiProperty()
-    stateRoot: string;
-
-    @ApiProperty()
-    receiptsRoot: string;
-
-    @ApiProperty()
-    miner: string;
-
-    @ApiProperty()
-    extraData: string;
-
-    @ApiProperty()
-    gasLimit: number;
-
-    @ApiProperty()
-    gasUsed: number;
-
-    @ApiProperty()
-    timestamp: string;
-
-    @ApiProperty({ nullable: true })
-    baseFeePerGas?: number;
-
-    @ApiProperty()
-    size: number;
-
-    @ApiProperty()
-    difficulty: number;
-
-    @ApiProperty()
-    totalDifficulty: number;
-
-    @ApiProperty({ isArray: true })
-    uncles: string[];
+    updated_at: string;
 }

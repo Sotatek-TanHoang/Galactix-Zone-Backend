@@ -12,33 +12,28 @@ import { UserRequestDto } from './dtos/user-request.dto';
 export class UserRepository extends BaseRepository<UserEntity> {
     protected alias: ETableName = ETableName.USER;
     buildQueryBuilder(params: UserRequestDto) {
-        const { id, hash, number } = params;
+        const { id, wallet_address, query, status, role } = params;
         const qb = this.createQb();
         qb.select([
             `${this.alias}.id`,
-            `${this.alias}.number`,
-            `${this.alias}.hash`,
-            `${this.alias}.parentHash`,
-            `${this.alias}.nonce`,
-            `${this.alias}.sha3Uncles`,
-            `${this.alias}.logsBloom`,
-            `${this.alias}.transactionRoot`,
-            `${this.alias}.stateRoot`,
-            `${this.alias}.receiptsRoot`,
-            `${this.alias}.miner`,
-            `${this.alias}.extraData`,
-            `${this.alias}.gasLimit`,
-            `${this.alias}.gasUsed`,
-            `${this.alias}.timestamp`,
-            `${this.alias}.baseFeePerGas`,
-            `${this.alias}.size`,
-            `${this.alias}.difficulty`,
-            `${this.alias}.totalDifficulty`,
-            `${this.alias}.uncles`,
+            `${this.alias}.wallet_address`,
+            `${this.alias}.username`,
+            `${this.alias}.email`,
+            `${this.alias}.created_at`,
+            `${this.alias}.updated_at`,
         ]);
         if (id) qb.where(`${this.alias}.id = :id`, { id });
-        if (hash) qb.where(`${this.alias}.hash = :hash`, { hash });
-        if (number) qb.where(`${this.alias}.number = :number`, { number });
+        if (wallet_address) qb.where(`${this.alias}.wallet_address = :wallet_address`, { wallet_address });
+        if (status) {
+        }
+        if (role) {
+        }
+        if (query) {
+            const searchQuery = `%${query}%`;
+            qb.where(`${this.alias}.username like :searchQuery`, { searchQuery })
+                .orWhere(`${this.alias}.wallet_address like :searchQuery`, { searchQuery })
+                .orWhere(`${this.alias}.email like :searchQuery`, { searchQuery });
+        }
 
         return qb;
     }

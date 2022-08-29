@@ -2,6 +2,8 @@ import { BasePaginationWithSortRequestDto } from '@core/base-request.dto';
 
 export class UserRequestDto extends BasePaginationWithSortRequestDto {
     id?: number;
-    hash?: string;
-    number?: number;
+    wallet_address?: string;
+    query?: string;
+    role?: string;
+    status?: string;
 }
