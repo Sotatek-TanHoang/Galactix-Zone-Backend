@@ -1,9 +1,9 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { UserService } from './providers/Block.service';
-import { BlocksRequestDto } from './providers/dtos/block-request.dto';
-import { UserResponseDto } from './providers/dtos/block-response.dto';
+import { UserService } from './providers/User.service';
+import { UserRequestDto } from './providers/dtos/user-request.dto';
+import { UserResponseDto } from './providers/dtos/user-response.dto';
 
 @Controller('user')
 @ApiTags('User')

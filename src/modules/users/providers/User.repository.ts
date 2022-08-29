@@ -6,12 +6,12 @@ import { BaseRepository } from '@core/base-repository';
 
 import { UserEntity } from '@entities/Block.entity';
 
-import { BlocksRequestDto } from './dtos/block-request.dto';
+import { UserRequestDto } from './dtos/user-request.dto';
 
 @EntityRepository(UserEntity)
 export class UserRepository extends BaseRepository<UserEntity> {
     protected alias: ETableName = ETableName.USER;
-    buildQueryBuilder(params: BlocksRequestDto) {
+    buildQueryBuilder(params: UserRequestDto) {
         const { id, hash, number } = params;
         const qb = this.createQb();
         qb.select([
@@ -42,14 +42,14 @@ export class UserRepository extends BaseRepository<UserEntity> {
 
         return qb;
     }
-    async getMany(options: BlocksRequestDto) {
+    async getMany(options: UserRequestDto) {
         const qb = this.buildQueryBuilder(options);
 
         this.queryBuilderAddPagination(qb, options);
         return await qb.getManyAndCount();
     }
 
-    async getOne(options: BlocksRequestDto) {
+    async getOne(options: UserRequestDto) {
         const qb = this.buildQueryBuilder(options);
         return await qb.getOne();
     }

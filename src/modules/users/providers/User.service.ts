@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestj
 
 import { BasePaginationResponseDto } from '@core/base-response.dto';
 
-import { UserRepository } from './Block.repository';
-import { BlocksRequestDto } from './dtos/block-request.dto';
+import { UserRepository } from './User.repository';
+import { UserRequestDto } from './dtos/user-request.dto';
 
 @Injectable()
 export class UserService {

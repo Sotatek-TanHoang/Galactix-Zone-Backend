@@ -1,6 +1,6 @@
 import { BasePaginationWithSortRequestDto } from '@core/base-request.dto';
 
-export class BlocksRequestDto extends BasePaginationWithSortRequestDto {
+export class UserRequestDto extends BasePaginationWithSortRequestDto {
     id?: number;
     hash?: string;
     number?: number;
