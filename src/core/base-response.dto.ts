@@ -14,3 +14,8 @@ export class BasePaginationResponseDto<T = any> {
         } as BasePaginationResponseDto<T>;
     }
 }
+
+export class BaseReponseDto{
+    message:string;
+    statusCode:number;
+}

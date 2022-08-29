@@ -1,3 +1,4 @@
+import { BaseReponseDto } from '@core/base-response.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UserResponseDto {
@@ -14,11 +15,14 @@ export class UserResponseDto {
     username: string;
 
     @ApiProperty()
-    status: number;
+    status: string;
 
     @ApiProperty()
     created_at: string;
 
     @ApiProperty()
     updated_at: string;
+
+    @ApiProperty()
+    token:string
 }

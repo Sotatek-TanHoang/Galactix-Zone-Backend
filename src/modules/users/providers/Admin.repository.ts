@@ -4,13 +4,13 @@ import { ETableName } from '@constants/entity.constant';
 
 import { BaseRepository } from '@core/base-repository';
 
-import { UserEntity } from '@entities/User.entity';
+import { AdminEntity } from '@entities/User.entity';
 
 import { CreateUserDto, UserRequestDto } from './dtos/user-request.dto';
 import { EUserStatus } from '@constants/user.constant';
 
-@EntityRepository(UserEntity)
-export class UserRepository extends BaseRepository<UserEntity> {
+@EntityRepository(AdminEntity)
+export class AdminRepository extends BaseRepository<AdminEntity> {
     protected alias: ETableName = ETableName.USER;
     buildQueryBuilder(params: UserRequestDto) {
         const { id, wallet_address, query, status, role } = params;

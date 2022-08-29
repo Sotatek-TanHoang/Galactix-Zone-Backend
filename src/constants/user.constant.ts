@@ -3,3 +3,7 @@ export enum EUserRole {
     ADMIN = 'admin',
     SUPER_ADMIN = 'super_admin',
 }
+export enum EUserStatus{
+    NORMAL="normal",
+    BLOCKED="blocked"
+}

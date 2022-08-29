@@ -6,11 +6,12 @@ import { initSwagger } from 'swagger';
 import { EEnvKey } from '@constants/env.constant';
 
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
     const configService = app.get(ConfigService);
-
+    app.useGlobalPipes(new ValidationPipe());
     app.setGlobalPrefix(configService.get<string>(EEnvKey.GLOBAL_PREFIX));
     app.enableCors();
 
