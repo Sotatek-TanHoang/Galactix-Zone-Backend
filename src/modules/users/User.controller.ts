@@ -24,7 +24,7 @@ import { SignatureValidationPipe } from '@shared/pipes/signature.pipe';
 import { formatReponseSuccess } from '@shared/utils/format';
 import { Roles } from '@shared/utils/helpers';
 
-import { CreateAdminDto, CreateUserDto, LoginUserDto, UserRequestDto } from './providers/dtos/user-request.dto';
+import {  CreateUserDto, LoginUserDto } from './providers/dtos/user-request.dto';
 import { UserResponseDto } from './providers/dtos/user-response.dto';
 import { UserService } from './providers/User.service';
 
@@ -48,7 +48,7 @@ export class UserController {
             }
 
             const response = { ...user, token: null };
-            response.token = await this.authService.signJWT(response);
+            response.token = await this.authService.signUserJWT(response);
 
             return formatReponseSuccess(response);
         } catch (e) {

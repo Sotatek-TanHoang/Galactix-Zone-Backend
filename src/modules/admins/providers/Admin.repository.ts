@@ -7,7 +7,7 @@ import { BaseRepository } from '@core/base-repository';
 
 import { AdminEntity } from '@entities/Admin.entity';
 
-import { CreateUserDto, UserRequestDto } from './dtos/admin-request.dto';
+import { CreateAdminDto, UserRequestDto } from './dtos/admin-request.dto';
 
 @EntityRepository(AdminEntity)
 export class AdminRepository extends BaseRepository<AdminEntity> {
@@ -51,7 +51,7 @@ export class AdminRepository extends BaseRepository<AdminEntity> {
         const qb = this.buildQueryBuilder(options);
         return await qb.getOne();
     }
-    async saveOne(data: CreateUserDto) {
+    async saveOne(data: CreateAdminDto) {
         const { wallet_address, email = '', username = '', role } = data;
         return await this.save({ wallet_address, email, username, role, status: EUserStatus.NORMAL });
     }

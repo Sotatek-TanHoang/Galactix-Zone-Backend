@@ -28,9 +28,6 @@ export class LoginUserDto {
     username?: string;
 }
 
-export class CreateUserDto extends LoginUserDto {
-    role?: string;
-}
 
 export class CreateAdminDto {
     @IsNotEmpty()

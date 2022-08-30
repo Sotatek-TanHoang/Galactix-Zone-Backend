@@ -26,6 +26,9 @@ import { Roles } from '@shared/utils/helpers';
 import { AdminService } from './providers/Admin.service';
 import { CreateAdminDto, LoginUserDto } from './providers/dtos/admin-request.dto';
 import { UserResponseDto } from './providers/dtos/admin-response.dto';
+import { AdminJwtStrategy, UserJwtStrategy } from '@shared/auth/jwt.strategy';
+import { AuthGuard } from '@nestjs/passport';
+import { EAuthGuard } from '@constants/auth.constant';
 
 @Controller('')
 @ApiTags('User')
@@ -41,7 +44,7 @@ export class AdminController {
             throw new HttpException('Admin not found!', HttpStatus.NOT_FOUND);
         }
         const response = { ...user, token: null };
-        response.token = await this.authService.signJWT(response);
+        response.token = await this.authService.signAdminJwt(response);
 
         return formatReponseSuccess(response);
     }
@@ -58,7 +61,7 @@ export class AdminController {
         return 'edit admin ok';
     }
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(AuthGuard(EAuthGuard.ADMIN_GUARD))
     @Get('/admin')
     @ApiOkResponse({ type: UserResponseDto })
     handleGetManyAdmin(@Req() req) {

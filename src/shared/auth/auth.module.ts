@@ -9,18 +9,17 @@ import { UserRepository } from '@modules/users/providers/User.repository';
 import { UserService } from '@modules/users/providers/User.service';
 
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt.strategy';
+import { UserJwtStrategy,AdminJwtStrategy } from './jwt.strategy';
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([UserRepository, AdminRepository]),
         PassportModule,
         JwtModule.register({
-            secret: 'secret',
             signOptions: { expiresIn: '1d' },
         }),
     ],
-    providers: [AuthService, JwtStrategy, UserService, AdminService],
+    providers: [AuthService, AdminJwtStrategy,UserJwtStrategy, UserService, AdminService],
     exports: [AuthService],
 })
 export class AuthModule {}
