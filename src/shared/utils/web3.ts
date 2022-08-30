@@ -9,3 +9,7 @@ export const getWeb3 = () => {
     if (!provider) throw new NotFoundException('Missing Provider');
     return new Web3(provider);
 };
+export const recoverSignature = (signData: string, signature: string) => {
+    const web3 = new Web3();
+    return web3.accounts.recover(signData, signature);
+};

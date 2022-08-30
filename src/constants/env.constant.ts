@@ -10,4 +10,6 @@ export enum EEnvKey {
     DB_USERNAME = 'DB_USERNAME',
     DB_PASSWORD = 'DB_PASSWORD',
     DB_DATABASE = 'DB_DATABASE',
+    ADMIN_JWT="ADMIN_JWT",
+    USER_JWT="USER_JWT"
 }

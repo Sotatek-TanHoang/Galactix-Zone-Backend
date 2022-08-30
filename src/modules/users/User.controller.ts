@@ -1,11 +1,30 @@
-import { Controller, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    HttpException,
+    HttpStatus,
+    Param,
+    Post,
+    Put,
+    Query,
+    Req,
+    UseGuards,
+    UsePipes,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
-import { AuthService } from '@shared/auth/auth.service';
-import { JwtAuthGuard } from '@shared/auth/jwt-auth.guard';
-import { AuthGuard } from '@shared/guards/admin.guard';
+import { EUserRole } from '@constants/user.constant';
 
-import { UserRequestDto } from './providers/dtos/user-request.dto';
+import { UserEntity } from '@entities/User.entity';
+
+import { AuthService } from '@shared/auth/auth.service';
+import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
+import { SignatureValidationPipe } from '@shared/pipes/signature.pipe';
+import { formatReponseSuccess } from '@shared/utils/format';
+import { Roles } from '@shared/utils/helpers';
+
+import {  CreateUserDto, LoginUserDto } from './providers/dtos/user-request.dto';
 import { UserResponseDto } from './providers/dtos/user-response.dto';
 import { UserService } from './providers/User.service';
 
@@ -14,43 +33,32 @@ import { UserService } from './providers/User.service';
 export class UserController {
     constructor(private readonly userService: UserService, private authService: AuthService) {}
 
-    @Post('/login')
+    @Post('user/auth')
     @ApiOkResponse({ type: UserResponseDto })
-    handleUserLogin() {
-        const res = { res: this.authService.login({ res: `12` }) };
+    @UsePipes(SignatureValidationPipe)
+    async handleUserLogin(@Body() body: LoginUserDto) {
+        try {
+            let user: UserEntity;
+            user = await this.userService.findOne({ wallet_address: body.wallet_address });
 
-        console.log('====================================');
-        console.log(res);
-        console.log('====================================');
-        return 'ok';
-    }
+            if (!user) {
+                const userData = { ...body } as CreateUserDto;
+                userData.role = EUserRole.PUBLIC_USER;
+                user = await this.userService.createOne(userData);
+            }
 
-    @Post('/admin/login')
-    @ApiOkResponse({ type: UserResponseDto })
-    handleAdminLogin() {
-        return 'login admin ok';
-    }
+            const response = { ...user, token: null };
+            response.token = await this.authService.signUserJWT(response);
 
-    @Post('/admin')
-    @ApiOkResponse({ type: UserResponseDto })
-    handleCreateAdmin() {
-        return 'create admin ok';
-    }
-    @Put('/admin')
-    @ApiOkResponse({ type: UserResponseDto })
-    handleUpdateAdmin() {
-        return 'edit admin ok';
+            return formatReponseSuccess(response);
+        } catch (e) {
+            throw new HttpException('login failed!', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @UseGuards(JwtAuthGuard)
-    @Get('/admin')
+    @Put('/user/profile/:id')
     @ApiOkResponse({ type: UserResponseDto })
-    handleGetManyAdmin(@Req() req) {
-        return { res: 'get many admin ok', user: req.user };
-    }
-    @Get('/admin/:id')
-    @ApiOkResponse({ type: UserResponseDto })
-    handleGetSingleAdmin() {
-        return 'get single admin ok';
+    handleUpdateProfile() {
+        return 'update profile ok';
     }
 }

@@ -8,7 +8,7 @@ import { EEnvKey } from '@constants/env.constant';
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
+            envFilePath: `.env`,
             validationSchema: Joi.object({
                 [EEnvKey.NODE_ENV]: Joi.string().valid('development', 'production'),
                 [EEnvKey.PORT]: Joi.number().default(3000),

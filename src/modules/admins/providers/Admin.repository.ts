@@ -5,12 +5,12 @@ import { EUserStatus } from '@constants/user.constant';
 
 import { BaseRepository } from '@core/base-repository';
 
-import { UserEntity } from '@entities/User.entity';
+import { AdminEntity } from '@entities/Admin.entity';
 
-import { CreateUserDto, UserRequestDto } from './dtos/user-request.dto';
+import { CreateAdminDto, UserRequestDto } from './dtos/admin-request.dto';
 
-@EntityRepository(UserEntity)
-export class UserRepository extends BaseRepository<UserEntity> {
+@EntityRepository(AdminEntity)
+export class AdminRepository extends BaseRepository<AdminEntity> {
     protected alias: ETableName = ETableName.USER;
     buildQueryBuilder(params: UserRequestDto) {
         const { id, wallet_address, query, status, role } = params;
@@ -51,7 +51,7 @@ export class UserRepository extends BaseRepository<UserEntity> {
         const qb = this.buildQueryBuilder(options);
         return await qb.getOne();
     }
-    async saveOne(data: CreateUserDto) {
+    async saveOne(data: CreateAdminDto) {
         const { wallet_address, email = '', username = '', role } = data;
         return await this.save({ wallet_address, email, username, role, status: EUserStatus.NORMAL });
     }
