@@ -1,7 +1,8 @@
 import { IsEmail, IsEmpty, IsEnum, isNotEmpty, IsNotEmpty, IsOptional } from 'class-validator';
 
-import { BasePaginationWithSortRequestDto } from '@core/base-request.dto';
 import { EUserRole } from '@constants/user.constant';
+
+import { BasePaginationWithSortRequestDto } from '@core/base-request.dto';
 
 export class UserRequestDto extends BasePaginationWithSortRequestDto {
     id?: number;
@@ -17,7 +18,7 @@ export class LoginUserDto {
     @IsNotEmpty()
     signature: string;
     @IsNotEmpty()
-    sign_data: string;
+    sign_message: string;
 
     // others
     @IsEmail()
@@ -33,18 +34,17 @@ export class CreateUserDto extends LoginUserDto {
 
 export class CreateAdminDto {
     @IsNotEmpty()
-    wallet_address:string;
+    wallet_address: string;
 
     @IsOptional()
-    username:string
+    username: string;
     @IsOptional()
     @IsEmail()
-    email:string
+    email: string;
 
     @IsNotEmpty()
     @IsEnum(EUserRole)
-    role:string
-
+    role: string;
 }
 
-export class UpdateAdminDto extends CreateAdminDto{}
+export class UpdateAdminDto extends CreateAdminDto {}

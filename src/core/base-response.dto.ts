@@ -15,7 +15,7 @@ export class BasePaginationResponseDto<T = any> {
     }
 }
 
-export class BaseReponseDto{
-    message:string;
-    statusCode:number;
+export class BaseReponseDto {
+    message: string;
+    statusCode: number;
 }

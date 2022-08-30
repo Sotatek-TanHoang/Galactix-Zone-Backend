@@ -1,4 +1,3 @@
-
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 import { ETableName } from '@constants/entity.constant';

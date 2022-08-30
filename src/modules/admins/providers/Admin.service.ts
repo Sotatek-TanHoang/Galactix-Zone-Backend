@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestj
 
 import { BasePaginationResponseDto } from '@core/base-response.dto';
 
-import { CreateUserDto, LoginUserDto, UserRequestDto } from './dtos/admin-request.dto';
 import { AdminRepository } from './Admin.repository';
+import { CreateUserDto, LoginUserDto, UserRequestDto } from './dtos/admin-request.dto';
 
 @Injectable()
 export class AdminService {
@@ -11,7 +11,7 @@ export class AdminService {
     async findOne(req: UserRequestDto) {
         return this.adminRepo.getOne(req);
     }
-    async createOne(req:CreateUserDto){
-        return this.adminRepo.saveOne(req)
+    async createOne(req: CreateUserDto) {
+        return this.adminRepo.saveOne(req);
     }
 }

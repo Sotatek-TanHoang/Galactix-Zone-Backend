@@ -1,5 +1,6 @@
-import { BaseReponseDto } from '@core/base-response.dto';
 import { ApiProperty } from '@nestjs/swagger';
+
+import { BaseReponseDto } from '@core/base-response.dto';
 
 export class UserResponseDto {
     @ApiProperty()
@@ -24,5 +25,5 @@ export class UserResponseDto {
     updated_at: string;
 
     @ApiProperty()
-    token:string
+    token: string;
 }

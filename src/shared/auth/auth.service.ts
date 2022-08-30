@@ -1,8 +1,8 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { UserService } from '@modules/users/providers/User.service';
 import { AdminService } from '@modules/admins/providers/Admin.service';
+import { UserService } from '@modules/users/providers/User.service';
 
 @Injectable()
 export class AuthService {

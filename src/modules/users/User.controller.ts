@@ -1,5 +1,3 @@
-import { EUserRole } from '@constants/user.constant';
-import { UserEntity } from '@entities/User.entity';
 import {
     Body,
     Controller,
@@ -16,13 +14,15 @@ import {
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+import { EUserRole } from '@constants/user.constant';
+
+import { UserEntity } from '@entities/User.entity';
+
 import { AuthService } from '@shared/auth/auth.service';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 import { SignatureValidationPipe } from '@shared/pipes/signature.pipe';
 import { formatReponseSuccess } from '@shared/utils/format';
 import { Roles } from '@shared/utils/helpers';
-
-
 
 import { CreateAdminDto, CreateUserDto, LoginUserDto, UserRequestDto } from './providers/dtos/user-request.dto';
 import { UserResponseDto } from './providers/dtos/user-response.dto';
@@ -38,18 +38,18 @@ export class UserController {
     @UsePipes(SignatureValidationPipe)
     async handleUserLogin(@Body() body: LoginUserDto) {
         try {
-            let user:UserEntity;
+            let user: UserEntity;
             user = await this.userService.findOne({ wallet_address: body.wallet_address });
 
             if (!user) {
-                const userData={...body} as CreateUserDto;
-                userData.role=EUserRole.PUBLIC_USER;
+                const userData = { ...body } as CreateUserDto;
+                userData.role = EUserRole.PUBLIC_USER;
                 user = await this.userService.createOne(userData);
             }
-            
-            const response={...user,token:null};
-            response.token=await this.authService.signJWT(response);
-        
+
+            const response = { ...user, token: null };
+            response.token = await this.authService.signJWT(response);
+
             return formatReponseSuccess(response);
         } catch (e) {
             throw new HttpException('login failed!', HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,5 +61,4 @@ export class UserController {
     handleUpdateProfile() {
         return 'update profile ok';
     }
-
 }

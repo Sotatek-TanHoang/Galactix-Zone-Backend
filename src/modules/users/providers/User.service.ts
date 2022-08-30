@@ -11,7 +11,7 @@ export class UserService {
     async findOne(req: UserRequestDto) {
         return this.userRepo.getOne(req);
     }
-    async createOne(req:CreateUserDto){
-        return this.userRepo.saveOne(req)
+    async createOne(req: CreateUserDto) {
+        return this.userRepo.saveOne(req);
     }
 }

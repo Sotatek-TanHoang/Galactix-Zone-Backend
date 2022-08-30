@@ -31,11 +31,11 @@ export class Connection {
         const data = await this.web3.getCode(address);
         return data !== '0x';
     }
-    async recoverSignature(signature:string,signData:string){
-        try{
-            return this.web3.accounts.recover(signData,signature);
-        }catch(e){
-            throw new HttpException("check signature failed!",HttpStatus.BAD_REQUEST)
+    async recoverSignature(signature: string, signData: string) {
+        try {
+            return this.web3.accounts.recover(signData, signature);
+        } catch (e) {
+            throw new HttpException('check signature failed!', HttpStatus.BAD_REQUEST);
         }
     }
 }

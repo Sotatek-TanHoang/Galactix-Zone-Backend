@@ -1,13 +1,13 @@
 import { EntityRepository } from 'typeorm';
 
 import { ETableName } from '@constants/entity.constant';
+import { EUserStatus } from '@constants/user.constant';
 
 import { BaseRepository } from '@core/base-repository';
 
 import { AdminEntity } from '@entities/Admin.entity';
 
 import { CreateUserDto, UserRequestDto } from './dtos/admin-request.dto';
-import { EUserStatus } from '@constants/user.constant';
 
 @EntityRepository(AdminEntity)
 export class AdminRepository extends BaseRepository<AdminEntity> {
@@ -51,9 +51,8 @@ export class AdminRepository extends BaseRepository<AdminEntity> {
         const qb = this.buildQueryBuilder(options);
         return await qb.getOne();
     }
-    async saveOne(data:CreateUserDto){
-        const {wallet_address,email="",username="",role}=data;
-        return await this.save({wallet_address,email,username,role,status:EUserStatus.NORMAL});
+    async saveOne(data: CreateUserDto) {
+        const { wallet_address, email = '', username = '', role } = data;
+        return await this.save({ wallet_address, email, username, role, status: EUserStatus.NORMAL });
     }
-    
 }
