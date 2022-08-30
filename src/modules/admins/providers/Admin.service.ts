@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestj
 
 import { BasePaginationResponseDto } from '@core/base-response.dto';
 
-import { CreateUserDto, LoginUserDto, UserRequestDto } from './dtos/user-request.dto';
+import { CreateUserDto, LoginUserDto, UserRequestDto } from './dtos/admin-request.dto';
 import { AdminRepository } from './Admin.repository';
 
 @Injectable()

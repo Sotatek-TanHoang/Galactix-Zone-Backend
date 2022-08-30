@@ -4,9 +4,9 @@ import { ETableName } from '@constants/entity.constant';
 
 import { BaseRepository } from '@core/base-repository';
 
-import { AdminEntity } from '@entities/User.entity';
+import { AdminEntity } from '@entities/Admin.entity';
 
-import { CreateUserDto, UserRequestDto } from './dtos/user-request.dto';
+import { CreateUserDto, UserRequestDto } from './dtos/admin-request.dto';
 import { EUserStatus } from '@constants/user.constant';
 
 @EntityRepository(AdminEntity)

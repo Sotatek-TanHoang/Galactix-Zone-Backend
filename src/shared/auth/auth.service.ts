@@ -2,26 +2,26 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { UserService } from '@modules/users/providers/User.service';
-import { AdminService } from '@modules/users/providers/Admin.service';
+import { AdminService } from '@modules/admins/providers/Admin.service';
 
 @Injectable()
 export class AuthService {
     constructor(
         @Inject(forwardRef(() => UserService))
-        private usersService: UserService,
+        private userService: UserService,
         private adminService: AdminService,
         private jwtService: JwtService,
     ) {}
 
     async validateUser(wallet_address: string): Promise<any> {
-        const user = await this.usersService.findOne({ wallet_address });
+        const user = await this.userService.findOne({ wallet_address });
         if (user) {
             return user;
         }
         return null;
     }
     async validateAdmin(wallet_address: string): Promise<any> {
-        const user = await this.usersService.findOne({ wallet_address });
+        const user = await this.adminService.findOne({ wallet_address });
         if (user) {
             return user;
         }

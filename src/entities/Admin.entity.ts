@@ -6,8 +6,8 @@ import { BaseEntityIncludeTime } from '@core/base-entity';
 
 import { IUserAttribute } from './attributes/User.interface';
 
-@Entity(ETableName.USER)
-export class UserEntity extends BaseEntityIncludeTime implements IUserAttribute {
+@Entity(ETableName.ADMIN)
+export class AdminEntity extends BaseEntityIncludeTime implements IUserAttribute {
     @Column({ name: 'wallet_address', type: 'character varying' })
     wallet_address: string;
 
